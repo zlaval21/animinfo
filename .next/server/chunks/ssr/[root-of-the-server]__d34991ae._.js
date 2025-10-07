@@ -122,42 +122,29 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 const seasonsClient = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tutkli$2f$jikan$2d$ts$2f$dist$2f$index$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["SeasonsClient"]();
 async function ScrollingAnimeList() {
     let animeList = [];
-    // for (let malId = 1; rankingId <= 10; malId++) {
-    //   const fetchedAnime = await fetch(`https://api.jikan.moe/v4/anime/${malId}`);
-    //   if (fetchedAnime.status < 400) {
-    //     const animeJSON = await fetchedAnime.json();
-    //     const parsedAnime = animeJSON.data;
-    //     animeList.push({ rankingId, parsedAnime });
-    //     rankingId++;
-    //   }
-    // }
     await seasonsClient.getSeasonNow({
         page: 1
     }).then(async (response)=>{
         const resp = await response.data;
         animeList.push(...resp);
         return animeList;
-    // if (await response.pagination?.has_next_page) {
-    //   page += 1;
-    //   allAnimeData.push(...response.data);
-    //   fetchedSeasonalData(page, allAnimeData);
-    // } else {
-    //   return allAnimeData;
-    // }
     });
-    function deduplicateById(animeList, id) {
-        const noDuplicatesList = new Set();
-        return animeList.filter((anime)=>{
-            const val = anime[id];
-            if (noDuplicatesList.has(val)) return false;
-            noDuplicatesList.add(val);
-            return true;
-        });
-    }
+    // function deduplicateById<Anime>(
+    //   animeList: Anime[],
+    //   id: keyof Anime
+    // ): Anime[] {
+    //   const noDuplicatesList = new Set();
+    //   return animeList.filter((anime) => {
+    //     const val = anime[id];
+    //     if (noDuplicatesList.has(val)) return false;
+    //     noDuplicatesList.add(val);
+    //     return true;
+    //   });
+    // }
     const filteredList = deduplicateById(animeList, "mal_id");
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Fragment"], {
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "overflow-x-auto scroll-smooth max-w-screen bg-violet-950 shadow-md",
+            className: "overflow-x-auto scroll-smooth max-w-screen bg-violet-950 py-2 shadow-md",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                 className: "inline-flex px-7 mt-5 gap-x-7 flex-nowrap",
                 children: filteredList.map((anime, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -166,20 +153,31 @@ async function ScrollingAnimeList() {
                             className: "flex flex-col",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                    className: "relative inline-block",
                                     target: "_blank",
                                     href: `https://myanimelist.net/anime/${anime["mal_id"]}`,
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                        src: anime["images"]["webp"] ? anime["images"]["webp"]["large_image_url"] : anime["images"]["jpg"]["image_url"],
-                                        className: "shadow-xl rounded-lg min-w-[15.625rem] max-h-[19.5rem] cursor-pointer",
-                                        alt: `promo image for ${anime["title"]}`
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/components/horizontalListSlider.tsx",
-                                        lineNumber: 63,
-                                        columnNumber: 19
-                                    }, this)
-                                }, void 0, false, {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                            src: anime["images"]["webp"] ? anime["images"]["webp"]["large_image_url"] : anime["images"]["jpg"]["image_url"],
+                                            className: "shadow-xl transition duration-700 ease-in-out rounded-lg min-w-[15.625rem] max-h-[19.5rem] cursor-pointer",
+                                            alt: `promo image for ${anime["title"]}`
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/horizontalListSlider.tsx",
+                                            lineNumber: 46,
+                                            columnNumber: 19
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "absolute text-center inset-0 flex items-center mx-auto justify-center text-fuchsia-200 text-lg font-bold bg-black/65 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg",
+                                            children: anime["title_english"] ? anime["title_english"] : anime["title"]
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/horizontalListSlider.tsx",
+                                            lineNumber: 56,
+                                            columnNumber: 19
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/src/components/horizontalListSlider.tsx",
-                                    lineNumber: 59,
+                                    lineNumber: 41,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -190,7 +188,7 @@ async function ScrollingAnimeList() {
                                             size: 32
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/horizontalListSlider.tsx",
-                                            lineNumber: 75,
+                                            lineNumber: 64,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -198,34 +196,34 @@ async function ScrollingAnimeList() {
                                             children: anime["score"] ? anime["score"] : "Yet to Air"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/horizontalListSlider.tsx",
-                                            lineNumber: 76,
+                                            lineNumber: 65,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/horizontalListSlider.tsx",
-                                    lineNumber: 74,
+                                    lineNumber: 63,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/horizontalListSlider.tsx",
-                            lineNumber: 58,
+                            lineNumber: 40,
                             columnNumber: 15
                         }, this)
                     }, index, false, {
                         fileName: "[project]/src/components/horizontalListSlider.tsx",
-                        lineNumber: 57,
+                        lineNumber: 39,
                         columnNumber: 13
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/components/horizontalListSlider.tsx",
-                lineNumber: 55,
+                lineNumber: 37,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/horizontalListSlider.tsx",
-            lineNumber: 54,
+            lineNumber: 36,
             columnNumber: 7
         }, this)
     }, void 0, false);
@@ -266,8 +264,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$GetSeasonName$
 ;
 ;
 ;
-const formatSeasonName = (list)=>{
-    const firstAnime = list.length > 0 ? list[0] : "";
+const formatSeasonName = async (list)=>{
+    const firstAnime = await list.length > 0 ? list[0] : "";
     let seasonNameAndYear = "";
     if (!firstAnime) {
         return;
@@ -283,9 +281,23 @@ function Home() {
                     className: "items-center justify-items-center",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                            className: "mt-12 pt-6 pb-10 text-3xl font-bold",
-                            children: "Welcome to internet's newest corner for all things anime!"
-                        }, void 0, false, {
+                            className: "mt-12 pt-6 pb-10 text-3xl mx-auto text-center font-bold",
+                            children: [
+                                "Welcome to the ",
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
+                                    fileName: "[project]/src/app/page.tsx",
+                                    lineNumber: 22,
+                                    columnNumber: 28
+                                }, this),
+                                " internet's newest corner for ",
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
+                                    fileName: "[project]/src/app/page.tsx",
+                                    lineNumber: 22,
+                                    columnNumber: 64
+                                }, this),
+                                "  all things anime!"
+                            ]
+                        }, void 0, true, {
                             fileName: "[project]/src/app/page.tsx",
                             lineNumber: 21,
                             columnNumber: 11

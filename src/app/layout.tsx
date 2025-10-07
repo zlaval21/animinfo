@@ -21,7 +21,7 @@ export default function RootLayout({
     <>
       <header className="font-[family-name:var(--font-onest)] bg-violet-950 text-fuchsia-200 text-xl shadow-xl">
         <div className="flex justify-between text-shadow-md items-center font-semibold">
-          <div>
+          <div className="mr-[1.234rem]">
             <img
               className="inline-flex -mr-2.5"
               src="/photos/logo.png"
@@ -30,8 +30,9 @@ export default function RootLayout({
             />
             <p className="inline-flex shrink items-center">Animinfo</p>
           </div>
-          <p>Anime</p>
-          <p>Search</p>
+          <p className="mx-[1.234rem]">Anime</p>
+          {/* <p className="mx-[1.234rem]">Manga</p> */}
+          <p className="mx-[1.234rem]">Search</p>
         </div>
       </header>
       <html lang="en">
